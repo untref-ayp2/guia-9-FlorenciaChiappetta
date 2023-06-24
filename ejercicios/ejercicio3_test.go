@@ -21,6 +21,7 @@ func TestEjercicio3(t *testing.T) {
 		{"o4", 5, 25},
 	}
 	capacidadMochila := 7
+
 	salida := Ejercicio3(objetos, capacidadMochila)
 	fmt.Println("Objetos: ", objetos)
 	fmt.Println("Objetos seleccionados: ", salida)
@@ -29,14 +30,14 @@ func TestEjercicio3(t *testing.T) {
 	}
 
 	if !contains(salida, "o2", 1) {
-		t.Error("Se esperaba el objeto o1 con valor 1")
-	}
-
-	if !contains(salida, "o3", 1) {
 		t.Error("Se esperaba el objeto o2 con valor 1")
 	}
 
+	if !contains(salida, "o3", 1) {
+		t.Error("Se esperaba el objeto o3 con valor 1")
+	}
+
 	if !contains(salida, "o4", 0.4) {
-		t.Error("Se esperaba el objeto o3 con valor 0.4")
+		t.Error("Se esperaba el objeto o4 con valor 0.4")
 	}
 }
