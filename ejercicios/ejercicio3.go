@@ -19,25 +19,29 @@ type Objeto struct {
 // > El paso greedy es elegir primero el elemento que tenga mayor valor por unidad de peso
 
 func Ejercicio3(objetos []Objeto, capacidad int) map[Objeto]float32 {
-	aux := make(map[Objeto]float32)
-	capacidad2 := 0
-	objetos = ordenarObjetos(objetos)
-	for i := 0; i < len(objetos); i++ {
-		if (objetos[i].Valor / objetos[i].Peso) >= (objetos[i+1].Valor / objetos[i+1].Peso) {
-			aux[objetos[i]] = float32(objetos[i].Peso)
-			capacidad2 += objetos[i].Peso
+	objetovalpes := []int{}
+	var peso int
+	var valor int
+	var pesorestante int 
+
+	mapa := make(map[Objeto]float32)
+	for i:= 0; i < len(objetos); i++{
+	objetovalpes[i] = objetos[i].Valor / objetos[i].Peso
+	}
+
+	//ordenamos el arreglo por burbujeo de mayor a menor
+	for i := 0; i < len(objetos);i++ {
+		for j:=i ; j < len(objetos)-1-i;i++{
+			if objetovalpes[j] > objetovalpes[j+1] {
+				 objetovalpes[j],objetovalpes[j+1] = objetovalpes[j+1],objetovalpes[j]
+			}  
 		}
 
+		if objetos[i].Peso <= capacidad {			
+			peso += objetos[i].Peso
+			valor += objetos[i].Valor
+		}
+		}
 	}
-	return aux
 
-}
-
-func ordenarObjetos(objetos []Objeto) []Objeto {
-
-	sort.Slice(objetos, func(i, j int) bool {
-		return objetos[i].Valor > objetos[j].Valor
-	})
-
-	return objetos
-}
+} 
